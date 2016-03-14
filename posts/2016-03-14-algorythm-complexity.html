@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>aelaa.github.io - Сложность алгоритмов</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">aelaa.github.io</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Домой</a>
+                <a href="../about.html">Обо мне</a>
+                <a href="../archive.html">Архив</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="post-top">
+  { Алгоритмы, Computer Science }
+</div>
+
+<h2> Сложность алгоритмов </h2>
+
+<h1 id="такая-вот-интересная-сложность-введение-в-алгоритмическую-сложность"><strong>Такая вот интересная сложность – Введение в алгоритмическую сложность</strong></h1>
+<p>Оригинал - <a href="http://algosaur.us/algorithmic-complexity/"><em>http://algosaur.us/algorithmic-complexity/</em></a> от <a href="http://algosaur.us/author/radhika/">radhika</a></p>
+<p><strong>Неплохо знать что такое:</strong></p>
+<ul>
+<li>Степень</li>
+<li>Алгебра вообще</li>
+<li>Функции и асимптоты</li>
+<li>Сортировка вставками (на уровне алгоритма) и вообще сортировки</li>
+</ul>
+<p>Этот пост можно грубо разделить на 3 части, так что можете выбрать сразу любую, в зависимости от скилла:</p>
+<ul>
+<li><a href="#first">Юнлингам</a></li>
+<li><a href="#second">Падаванам</a></li>
+<li><a href="#third">Джедаям</a></li>
+</ul>
+<p><a name="first"></a> Алгоритмическая сложность и рост функций составляют самую основу алгоритмов. Они дают нам представление о том, насколько алгоритм быстрый или медленный, так что вы не сможете разрабатывать и анализировать алгоритмы, не зная про сложность.</p>
+<div class="figure">
+<img src="../images/complexity/image05.jpg" width="588" height="358" />
+
+</div>
+<p>Алгозавру очень хочется узнать что такое “рост функции”. И для этого он решил завести двух кроликов. А где два кролика, там… много кроликов. Усредним количество потомства с каждой пары до четырёх (не будем уточнять каким образом).</p>
+<div class="figure">
+<img src="../images/complexity/image00.jpg" width="642" height="398" />
+
+</div>
+<p>Если мы задумаем посчитать скорость роста количества кроликов, у нас получится <strong>2^n</strong>, где <strong>n</strong> - номер поколения. Это не очень хорошая новость для Алгозавра, ибо сколь бы ни были кролики няшными - в какой-то момент их будет <strong>слишком</strong> много.</p>
+<div class="figure">
+<img src="../images/complexity/image03.jpg" width="429" height="441" />
+
+</div>
+<p>Грубо говоря, сложность алгоритма разведения кроликов равна <strong>O(2^n)</strong>.</p>
+<div class="figure">
+<img src="../images/complexity/image07.jpg" width="296" height="244" />
+
+</div>
+<p>Поскольку количество кролей в следующем поколении растёт экспоненциально в зависимости от начального их количества (или, на языке алгоритма - входных данных).</p>
+<p>Давайте это разберём.</p>
+<p>“Порядок роста времени работы алгоритма является простейшей характеристикой эффективности алгоритма, и даёт возможность сравнить его по сложности с другими алгоритмами” (<a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B:_%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7"><em>Святое Евангелие </em></a>от CLRS)</p>
+<div class="figure">
+<img src="../images/complexity/image14.png" width="642" height="330" />
+
+</div>
+<p>(<a href="https://www.youtube.com/watch?v=Kbo7W5gSJEA"><em>для тех кто не в теме</em></a>) Представим, что Алгозавр спускается вниз по очень странной лестнице с <strong>n</strong> ступеньками. Чтобы спуститься вниз на одну ступеньку, он должен пройти по ней <strong>n</strong> шагов горизонтально, и только потом вниз.</p>
+<div class="figure">
+<img src="../images/complexity/image08.jpg" width="307" height="328" />
+
+</div>
+<p>Так что на каждой ступеньке он должен сделать <strong>n</strong> шагов. И для <strong>n</strong> ступенек всего он должен пройти <strong>n^2</strong> шагов.</p>
+<pre><code>def weirdStairs(nofStairs):
+    steps = 0
+    for i in range(0, nofStairs):
+        steps += nofStairs
+        steps += 1
+    print steps</code></pre>
+<p>Сколько времени займёт весь спуск?</p>
+<div class="figure">
+<img src="../images/complexity/image10.jpg" width="561" height="300" />
+
+</div>
+<p><a name="second"></a></p>
+<p>Аналогично давайте рассмотрим сортировку вставкой.</p>
+<pre><code>def insertionSort(list):
+    for i in range(1, len(list)):
+        currentValue = list[i]
+        position = index
+        while position &gt; 0 and list[position - 1] &gt; currentValue:
+            list[position] = list[position - 1]
+        list[position] = currentValue</code></pre>
+<p>Предположим наихудший вариант - список отсортирован в обратном порядке, т.е. каждая строчка кода в цикле выполнится для каждого элемента.</p>
+<p>Как видно по коду, каждый элемент в списке передвинет все остальные элементы.</p>
+<p>Если длина списка - <strong>n,</strong> то эффективность не будет линейно пропорциональна <strong>n</strong>, но будет пропорциональна <strong>n в квадрате.</strong></p>
+<p>Так что в худшем случае время работы алгоритма сортировки вставкой будет примерно равно <strong>O(n^2),</strong> где <strong>О</strong> - стандартное обозначение, а <strong>n</strong> - количество элементов в списке.</p>
+<p>Для измерения эффективности нас интересует <strong>только худший вариант</strong>.</p>
+<p>Пока что мы сортировали только списки из 10, максимум 100 элементов. <strong>Что, если их будет 1000? 1 000 000? Например количество пользователей Вконтакте?</strong></p>
+<p>Да, в таком случае алгоритмическая сложность действительно важна.В этих примерах количество элементов настолько большое, что имеет значение <strong>только наивысшая степень</strong>. Остальные числа не важны.</p>
+<p>Приоритет порядков роста функции примерно такой:</p>
+<div class="figure">
+<img src="../images/complexity/image11.jpg" width="389" height="616" />
+
+</div>
+<p>Грубо говоря, мы можем считать сложность алгоритма по одной только структуре циклов в нём.</p>
+<p>Проход по циклу даёт <strong>O(n),</strong> как и подсчёт его длины. Из чего следует, что время работы пропорционально количеству элементов.</p>
+<pre><code>def traversal(list):
+    for i in range(len(list)):
+        print list[i]</code></pre>
+<p>Теперь Алгозавр знает достаточно много о росте функции, чтобы понять какой алгоритм быстрее. Юпиии!</p>
+<p>Если хотите понять анализ сложности ещё глубже - читайте дальше. Или сварганьте кофейка, и возвращайтесь когда уляжется всё то, что вы уже прочитали. Можете оставить закладку прямо тут.</p>
+<p><a name="third"></a></p>
+<p>Открыв CLRS на 43 странице, Алгозавр увидел…</p>
+<div class="figure">
+<img src="../images/complexity/image06.jpg" width="642" height="396" />
+
+</div>
+<p>Давайте сперва выясним, что такое “асимптотическая нотация”. Как вы возможно знаете, когда аргумент функции близится к бесконечности, её значение приближается к некой линии, но никогда её не касается. Эта линия называется <strong>асимптотой</strong>.</p>
+<div class="figure">
+<img src="../images/complexity/image09.jpg" width="642" height="249" />
+
+</div>
+<div class="figure">
+<img src="../images/complexity/image02.jpg" width="592" height="252" />
+
+</div>
+<p>Вас это должно интересовать, поскольку разрабатывая алгоритм, Вам нужно знать как он работает на <strong>огромных числах.</strong> Вы уже знаете про О-нотацию: она показывает эффективность в самом худшем случае. Давайте перейдём к <strong>Ω</strong>. Я опять возьму в качестве примера сортировку. Но теперь входной список уже отсортирован как надо, т.е. это наилучший случай работы алгоритма.</p>
+<pre><code>def insertionSort(someList):
+    for i in range(1, len(someList)):
+        currentValue = someList[i]
+    position = i
+    while position &gt; 0 and someList[position - 1] &gt; currentValue:
+        someList[position] = someList[position - 1]
+        position -= 1
+        someList[position] = currentValue
+    return someList</code></pre>
+<p>Мы всё равно должны пройти список один раз, даже если нам не придётся заходить во вложенный цикл. Внешний цикл отработает <strong>n</strong> раз.</p>
+<p>Так что в наилучшем случае сложность этого алгоритма - <strong>Ω(n)</strong>.</p>
+<p>Чтобы понять что означают другие богом забытые символы, нам придётся вспомнить алгебру…</p>
+<p>Функции! И графики с ними!</p>
+<p>Формально мы можем определить <strong>Θ</strong>, <strong>O</strong>, и <strong>Ω</strong> вот так:</p>
+<div class="figure">
+<img src="../images/complexity/image13.jpg" width="642" height="222" />
+
+</div>
+<p>Если честно, понятнее не стало. Подключаем тяжёлую артиллерию: графики. (срисованы с 45 страницы CLRS)</p>
+<div class="figure">
+<img src="../images/complexity/image04.jpg" width="642" height="542" />
+
+</div>
+<p>Несколько тонкостей. Эти функции должны быть монотонны на множестве аргументов, начиная с n_0.</p>
+<p>Например <strong>Ω(g(n))</strong> определена только тогда, когда она меньше времени работы (<strong>c*g(n)</strong>) для всех n &gt; n_0.</p>
+<p>a) Это график <strong>Θ</strong>. Он выглядит как котлета в гамбургере между двумя функциями, что показывает, что <strong>Θ(g(n))</strong> определена только между верхей и нижней границами. Попробуйте доказать.</p>
+<p>b) Это график <strong>О</strong>. Время работы функции всегда меньше <strong>O(g(n))</strong>, что подтверждает, что <strong>О</strong> является верхней границей сложности. Хуже эффективности быть не может.</p>
+<p>c) для <strong>Ω</strong>. The Время работы функции всегда больше <strong>Ω(g(n))</strong>, и это лучший случай. Большей эффективности от алгоритма не ждите.</p>
+<div class="figure">
+<img src="../images/complexity/image01.jpg" width="614" height="261" />
+
+</div>
+<p>Терпение, мой друг. Вот практический смысл всего этого:</p>
+<p>1. <strong>Ω</strong> полезен, когда нужно узнать самый быстрый вариант работы.</p>
+<p>Ну, иногда это полезно.</p>
+<p>2. <strong>О</strong> покажет самый худший вариант работы алгоритма.</p>
+<p>Вот это интересно всегда.</p>
+<p>3. Найти <strong>Θ</strong> сложнее чем <strong>О</strong>, так что <strong>О</strong> используют чаще. Математики скажут что это не кошерно, но пусть считают его сами.</p>
+<p>Фух, на этом всё с теорией.</p>
+<div class="figure">
+<img src="../images/complexity/image12.jpg" width="529" height="373" />
+
+</div>
+<p>Автор оригинала оставил адрес: rawrr@algosaur.us</p>
+<p><strong>Литература:</strong></p>
+<p><a href="http://www.twirpx.com/file/1793684/"><em>CLRS</em></a></p>
+<p><a href="http://www.twirpx.com/file/1416654/"><em>Дасгупта С., Пападимитриу Х., Вазирани У. Алгоритмы</em></a>.</p>
+<p><a href="http://www.murderousmaths.co.uk/books/bkmm8.htm"><em>Numbers: The Key to the Universe – Kjartan Poskitt </em></a>(Пример про кроликов взят оттуда)</p>
+
+<div class="post-bottom">
+  <div class="date">
+    14.03.16
+  </div>
+</div>
+
+        </div>
+        <div id="footer">
+            Generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            . Sources of this blog is
+            <a href="http://github.com/aelaa/aelaa.github.io.hs">here (Github)</a>.
+        </div>
+    </body>
+</html>
