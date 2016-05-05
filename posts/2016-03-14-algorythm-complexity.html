@@ -42,34 +42,35 @@
 </ul>
 <p><a name="first"></a> Алгоритмическая сложность и рост функций составляют самую основу алгоритмов. Они дают нам представление о том, насколько алгоритм быстрый или медленный, так что вы не сможете разрабатывать и анализировать алгоритмы, не зная про сложность.</p>
 <div class="figure">
-<img src="../images/complexity/image05.jpg" width="588" height="358" />
+<img src="../images/complexity05.jpg" width="588" height="358" />
 
 </div>
 <p>Алгозавру очень хочется узнать что такое “рост функции”. И для этого он решил завести двух кроликов. А где два кролика, там… много кроликов. Усредним количество потомства с каждой пары до четырёх (не будем уточнять каким образом).</p>
 <div class="figure">
-<img src="../images/complexity/image00.jpg" width="642" height="398" />
+<img src="../images/complexity00.jpg" width="642" height="398" />
 
 </div>
 <p>Если мы задумаем посчитать скорость роста количества кроликов, у нас получится <strong>2^n</strong>, где <strong>n</strong> - номер поколения. Это не очень хорошая новость для Алгозавра, ибо сколь бы ни были кролики няшными - в какой-то момент их будет <strong>слишком</strong> много.</p>
 <div class="figure">
-<img src="../images/complexity/image03.jpg" width="429" height="441" />
+<img src="../images/complexity03.jpg" width="429" height="441" />
 
 </div>
 <p>Грубо говоря, сложность алгоритма разведения кроликов равна <strong>O(2^n)</strong>.</p>
 <div class="figure">
-<img src="../images/complexity/image07.jpg" width="296" height="244" />
+<img src="../images/complexity07.jpg" width="296" height="244" />
 
 </div>
 <p>Поскольку количество кролей в следующем поколении растёт экспоненциально в зависимости от начального их количества (или, на языке алгоритма - входных данных).</p>
 <p>Давайте это разберём.</p>
 <p>“Порядок роста времени работы алгоритма является простейшей характеристикой эффективности алгоритма, и даёт возможность сравнить его по сложности с другими алгоритмами” (<a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B:_%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7"><em>Святое Евангелие </em></a>от CLRS)</p>
 <div class="figure">
-<img src="../images/complexity/image14.png" width="642" height="330" />
+<img src="../images/complexity14.png" width="642" height="330" />
 
 </div>
-<p>(<a href="https://www.youtube.com/watch?v=Kbo7W5gSJEA"><em>для тех кто не в теме</em></a>) Представим, что Алгозавр спускается вниз по очень странной лестнице с <strong>n</strong> ступеньками. Чтобы спуститься вниз на одну ступеньку, он должен пройти по ней <strong>n</strong> шагов горизонтально, и только потом вниз.</p>
+<p>(<a href="https://www.youtube.com/watch?v=Kbo7W5gSJEA"><em>для тех кто не в теме</em></a>)</p>
+<p>Представим, что Алгозавр спускается вниз по очень странной лестнице с <strong>n</strong> ступеньками. Чтобы спуститься вниз на одну ступеньку, он должен пройти по ней <strong>n</strong> шагов горизонтально, и только потом вниз.</p>
 <div class="figure">
-<img src="../images/complexity/image08.jpg" width="307" height="328" />
+<img src="../images/complexity08.jpg" width="307" height="328" />
 
 </div>
 <p>Так что на каждой ступеньке он должен сделать <strong>n</strong> шагов. И для <strong>n</strong> ступенек всего он должен пройти <strong>n^2</strong> шагов.</p>
@@ -81,7 +82,7 @@
     print steps</code></pre>
 <p>Сколько времени займёт весь спуск?</p>
 <div class="figure">
-<img src="../images/complexity/image10.jpg" width="561" height="300" />
+<img src="../images/complexity10.jpg" width="561" height="300" />
 
 </div>
 <p><a name="second"></a></p>
@@ -102,7 +103,7 @@
 <p>Да, в таком случае алгоритмическая сложность действительно важна.В этих примерах количество элементов настолько большое, что имеет значение <strong>только наивысшая степень</strong>. Остальные числа не важны.</p>
 <p>Приоритет порядков роста функции примерно такой:</p>
 <div class="figure">
-<img src="../images/complexity/image11.jpg" width="389" height="616" />
+<img src="../images/complexity11.jpg" width="581" height="424" />
 
 </div>
 <p>Грубо говоря, мы можем считать сложность алгоритма по одной только структуре циклов в нём.</p>
@@ -115,16 +116,16 @@
 <p><a name="third"></a></p>
 <p>Открыв CLRS на 43 странице, Алгозавр увидел…</p>
 <div class="figure">
-<img src="../images/complexity/image06.jpg" width="642" height="396" />
+<img src="../images/complexity06.jpg" width="642" height="396" />
 
 </div>
 <p>Давайте сперва выясним, что такое “асимптотическая нотация”. Как вы возможно знаете, когда аргумент функции близится к бесконечности, её значение приближается к некой линии, но никогда её не касается. Эта линия называется <strong>асимптотой</strong>.</p>
 <div class="figure">
-<img src="../images/complexity/image09.jpg" width="642" height="249" />
+<img src="../images/complexity09.jpg" width="642" height="249" />
 
 </div>
 <div class="figure">
-<img src="../images/complexity/image02.jpg" width="592" height="252" />
+<img src="../images/complexity02.jpg" width="592" height="252" />
 
 </div>
 <p>Вас это должно интересовать, поскольку разрабатывая алгоритм, Вам нужно знать как он работает на <strong>огромных числах.</strong> Вы уже знаете про О-нотацию: она показывает эффективность в самом худшем случае. Давайте перейдём к <strong>Ω</strong>. Я опять возьму в качестве примера сортировку. Но теперь входной список уже отсортирован как надо, т.е. это наилучший случай работы алгоритма.</p>
@@ -143,12 +144,12 @@
 <p>Функции! И графики с ними!</p>
 <p>Формально мы можем определить <strong>Θ</strong>, <strong>O</strong>, и <strong>Ω</strong> вот так:</p>
 <div class="figure">
-<img src="../images/complexity/image13.jpg" width="642" height="222" />
+<img src="../images/complexity13.jpg" width="642" height="222" />
 
 </div>
 <p>Если честно, понятнее не стало. Подключаем тяжёлую артиллерию: графики. (срисованы с 45 страницы CLRS)</p>
 <div class="figure">
-<img src="../images/complexity/image04.jpg" width="642" height="542" />
+<img src="../images/complexity04.jpg" width="642" height="542" />
 
 </div>
 <p>Несколько тонкостей. Эти функции должны быть монотонны на множестве аргументов, начиная с n_0.</p>
@@ -157,7 +158,7 @@
 <p>b) Это график <strong>О</strong>. Время работы функции всегда меньше <strong>O(g(n))</strong>, что подтверждает, что <strong>О</strong> является верхней границей сложности. Хуже эффективности быть не может.</p>
 <p>c) для <strong>Ω</strong>. The Время работы функции всегда больше <strong>Ω(g(n))</strong>, и это лучший случай. Большей эффективности от алгоритма не ждите.</p>
 <div class="figure">
-<img src="../images/complexity/image01.jpg" width="614" height="261" />
+<img src="../images/complexity01.jpg" width="614" height="261" />
 
 </div>
 <p>Терпение, мой друг. Вот практический смысл всего этого:</p>
@@ -168,7 +169,7 @@
 <p>3. Найти <strong>Θ</strong> сложнее чем <strong>О</strong>, так что <strong>О</strong> используют чаще. Математики скажут что это не кошерно, но пусть считают его сами.</p>
 <p>Фух, на этом всё с теорией.</p>
 <div class="figure">
-<img src="../images/complexity/image12.jpg" width="529" height="373" />
+<img src="../images/complexity12.jpg" width="529" height="373" />
 
 </div>
 <p>Автор оригинала оставил адрес: rawrr@algosaur.us</p>
