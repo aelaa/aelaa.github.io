@@ -12,7 +12,12 @@
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
             ga('create', 'UA-79943380-1', 'auto');
-            ga('set', 'ttnow', Date.now())
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'mainpage',
+                eventAction: 'in',
+                eventLabel: 'Mainpage opened'
+            });
             ga('send', 'pageview');
 
         </script>
