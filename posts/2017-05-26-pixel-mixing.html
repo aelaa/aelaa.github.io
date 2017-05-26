@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>aelaa.github.io - Pixel Mixing</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">aelaa.github.io</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Домой</a>
+                <a href="../about.html">Обо мне</a>
+                <a href="../archive.html">Архив</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="post-top">
+  <a href="../tags/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B.html">Алгоритмы</a>, <a href="../tags/%D0%93%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0.html">Графика</a>
+</div>
+
+<h2> Pixel Mixing </h2>
+
+<h1 id="pixel-mixing"><strong>Pixel Mixing</strong></h1>
+<p>Оригинал - <a href="http://entropymine.com/imageworsener/pixelmixing/">http://entropymine.com/imageworsener/pixelmixing</a></p>
+<p>В этой статье мы рассмотрим простой алгоритм сжатия изображений. У него нет стандартизированного имени, его называют <em>pixel mixing</em>, <em>pixel averaging</em> или <em>area map</em>. Будем в рамках статьи использовать название <em>pixel mixing</em>.</p>
+<p>Он очень похож на линейную интерполяцию или <em>box filtering</em>, но не совсем.</p>
+<p>Алгоритм очень простой для понимания. Начнём с оригинального изображения 8×8:</p>
+<div class="figure">
+<img src="../images/f-8.png" width="204" height="166" />
+
+</div>
+<p>Забудем про сетку 8х8, и наложим поверх изображения новую, того размера, к которому нам нужно сжать изображение:</p>
+<div class="figure">
+<img src="../images/f-5-grid.png" width="204" height="166" />
+
+</div>
+<p>Каждому пикселю новой сетки присвоим цвет, равный размеру закрашенной области внутри нового пикселя:</p>
+<div class="figure">
+<img src="../images/f-5.png" width="204" height="166" />
+
+</div>
+<p>И алгоритм на этом завершён. Увеличение работает точно так же:</p>
+<div class="figure">
+<img src="../images/f-8.png" width="204" height="166" />
+
+</div>
+<div class="figure">
+<img src="../images/f-11-grid.png" width="204" height="166" />
+
+</div>
+<div class="figure">
+<img src="../images/f-11.png" width="204" height="166" />
+
+</div>
+<p><strong>Плюсы:</strong></p>
+<ul>
+<li>Простой, лёгкий для понимания и реализации;</li>
+<li>Отображает почти то же, что вы видите приближаясь или удаляясь относительно объекта;</li>
+<li>Относительно быстрый;</li>
+<li>Сохраняет общую яркость изображения абсолютно такой же;</li>
+<li>Довольно хорошее качество при уменьшении или небольшом увеличении размера;</li>
+<li>Работает с любыми изображениями, даже случайным набором цветных пикселей. Большинство алгоритмов считают смежные пиксели зависимыми друг от друга. Pixel mixing такую зависимость не учитывает.</li>
+</ul>
+<p><strong>Минусы:</strong></p>
+<ul>
+<li>Плохо подходит для большого увеличения размера, поскольку сильно пикселизирует изображение;</li>
+<li>Вызывает довольно сильный алиасинг, для изображений с мелкими деталями может вызывать муар;</li>
+<li>Не выполняет анти-алиасинг;</li>
+<li>Обрабатывает пиксели как <em>маленькие квадраты</em>, что не всегда так.</li>
+</ul>
+<p><strong>Алиасинг</strong></p>
+<p>При уменьшении изображения pixel mixing имеет проблему, так называемый <em>алиасинг</em>. Если мы сильно уменьшим размер изображения ниже, некоторые чёрные и белые аркс будут слишком мелкими:</p>
+<div class="figure">
+<img src="../images/rings.png" width="588" height="358" />
+
+</div>
+<p>Самое лучшее, что можно сделать в такой ситуации - использовать сплошной усреднённый цвет. Поэтому чем дальше мы двигаемся от левого верхнего угла, тем тоньше становятся линии, и некоторые точки сливаются в сплошной цвет, примерно так:</p>
+<div class="figure">
+<img src="../images/rings-lanczos.png" width="588" height="358" />
+
+</div>
+<p>Но с pixel mixingом, когда линии совсем тонкие, мы видим совсем неожиданные артефакты:</p>
+<div class="figure">
+<img src="../images/rings-mix.png" width="588" height="358" />
+
+</div>
+<p>Большинство реальных изображений этому не подвержены, но проблема существует. Вот похожая проблема. Если в исходном изображении есть резкие изкажения, как тут:</p>
+<div class="figure">
+<img src="../images/ellipse.png" width="588" height="358" />
+
+</div>
+<p>Pixel mixing очень плохо анти-алиасит его:</p>
+<div class="figure">
+<img src="../images/ellipse-mix.png" width="588" height="358" />
+
+</div>
+<p>Большинство алгоритмов, например Ланцоша, делает это намного лучше:</p>
+<div class="figure">
+<img src="../images/ellipse-lanczos.png" width="588" height="358" />
+
+</div>
+
+<div class="post-bottom">
+  <div class="date">
+    26.05.17
+  </div>
+</div>
+
+        </div>
+        <div id="footer">
+            Generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            . Sources of this blog is
+            <a href="http://github.com/aelaa/aelaa.github.io.hs">here (Github)</a>.
+        </div>
+    </body>
+</html>
